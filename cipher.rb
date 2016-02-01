@@ -1,7 +1,7 @@
 class Caesar
   def initialize(key,alphabet = ('a'..'z').to_a)
+  	# To do encryption, type in ruby cipher.rb <key> <plaintext>
     key_array = key.split("").uniq
-
     @decrypt = alphabet.join
     @encrypt = (key_array + ( alphabet - key_array )).join
   end
