@@ -14,6 +14,7 @@ class Caesar
   def decrypt(string)
     string.downcase.tr(@encrypt, @decrypt)
   end
+  
 end
 
 puts "*** Caesar Cipher ***"
