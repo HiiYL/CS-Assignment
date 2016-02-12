@@ -1,3 +1,5 @@
+require_relative 'caesarCipher'
+require_relative 'railFenceCipher'
 
 puts  "==============================="
 puts  "======Combination Script======="
@@ -11,7 +13,7 @@ if decision == 1
 
 elsif decision == 2
 	puts "Please input your plaintext"
-	plaintext = gets.chomp
+	plaintext = gets
 end
 
 puts "Press 1 for Caesar Cipher Encryption"
@@ -22,8 +24,12 @@ if decisionToEncrypt == 1
 	key = gets.chomp
 	text = Caesar.new(key)
 	puts text.encrypt(plaintext)
-elsif decisionToEncrypt == 2
 
+elsif decisionToEncrypt == 2
+	puts "Please input the key: "
+	key = gets.chomp.to_i
+	text = RailFence.new(key)
+	puts text.encrypt(plaintext)
 end 
 	
 #calling rf.rb script directly
