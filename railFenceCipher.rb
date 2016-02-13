@@ -12,7 +12,7 @@ class RailFence
   #loop below is to loop from top to 2nd bottom case
   def encrypt(plain)
     plain = plain.gsub(" ", "") unless plain.nil?
-    plain_len = plain.length-1
+    plain_len = plain.length
     while @cur_line < @key-1 
       #loop through each level in rail fence
       @skip=2*(@key-@cur_line-1)
@@ -37,14 +37,14 @@ class RailFence
       @cipher.push(plain[i])
       i+=2*(@key-1)
     end
-
-    output = @cipher.join()
-
-  
+    
+    # convert array to string
     @cipher = @cipher.join()
+    # remove new line from string
+    @cipher = @cipher.delete("\n")
     output = @cipher
     puts "Encrpyted: " + output
-
+    return output
   end
 
   def decrypt
@@ -95,6 +95,6 @@ class RailFence
     @decipher = @decipher.join()
     output = @decipher
     puts "Decrpyted: " + output
-
+    return output
   end
 end

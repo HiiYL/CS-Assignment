@@ -1,6 +1,9 @@
 require_relative 'caesarCipher'
 require_relative 'railFenceCipher'
 
+#init
+continue_encrypt = false
+
 puts  "==============================="
 puts  "======Combination Script======="
 puts  "==============================="
@@ -14,7 +17,6 @@ if decision == 1
 elsif decision == 2
 	puts "Please input your plaintext"
 	@plaintext = gets
-
 end
 
 decision2 = 'y'
@@ -26,19 +28,36 @@ while decision2=='y'
 		puts "Please input the key: "
 		key = gets.chomp
 		text = Caesar.new(key)
-		output = text.encrypt(@plaintext)
-		puts output
+			if continue_encrypt == false
+				@encrypted = text.encrypt(@plaintext)
+			else
+				@encrypted = text.encrypt(@encrypted)
+			end
+
 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
 		key = gets.chomp.to_i
 		text = RailFence.new(key)
-		output = text.encrypt(@plaintext)
-		puts output
+			if continue_encrypt == false
+				@encrypted = text.encrypt(@plaintext)
+			else
+				if @encrypted.nil?
+					puts "null"
+				end
+				@encrypted = text.encrypt(@encrypted)
+			end
+
 	end
 
 	puts "Press y to encrypt again, n to end the encryption"
 	decision2 = gets.chomp
+
+
+	if decision2 == 'y'
+		continue_encrypt = true
+		
+	end
 
 end
 	
