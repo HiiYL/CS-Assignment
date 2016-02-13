@@ -4,6 +4,7 @@ class RailFence
     @cipher=[]
     @decipher = []
     @cur_line=0
+    @cur_line2=0
     @skip=0
     @key = key 
   end
@@ -31,32 +32,49 @@ class RailFence
     end
 
     #loop below is to wrap the most bottom case
-    i=3
+    i=@cur_line
     while i < plain_len
       @cipher.push(plain[i])
       i+=2*(@key-1)
     end
-    output = @cipher.join()
+    @cipher = @cipher.join()
+    output = @cipher
     puts "Encrpyted: " + output
   end
 
-  def decrypt(plain)
-    @decipher[0] = @cipher[0]
-    counter = 1
+  def decrypt
+    # init (test)
+    cipher_len = @cipher.length
+    m=0
 
-    while counter != @cipher.size()
-      if counter%2 == 1
-         @decipher.push(@cipher[counter])   
+    # start looping
+    while @cur_line2 < @key-1 
+      @skip=2*(@key-@cur_line2-1)
+      n=@cur_line2
+      l=0
+      # start 2nd layer looping
+      while n < cipher_len
+        @decipher[n]=@cipher[m]
+        m=m+1
+        if (@cur_line2==0 || l%2 == 0)
+          n=n+@skip
+        else 
+          n=n+2*(@key-1)-@skip
+        end
+        l=l+1
       end
-      counter += 1
+      @cur_line2=@cur_line2+1
     end
-    while counter != 1
-      if counter%2 == 0
-        @decipher.push(@cipher[counter])
-      end
-      counter -= 1
-    end 
-    output = @decipher.join()
-    puts "Decrypted: " + output
+
+  
+    i=@cur_line2
+    while i < cipher_len
+      @decipher[i]= @cipher[m]
+      i+=2*(@key-1)
+      m=m+1
+    end
+    @decipher = @decipher.join()
+    output = @decipher
+    puts "Decrpyted: " + output
   end
 end
