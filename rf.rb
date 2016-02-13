@@ -16,8 +16,7 @@ puts "Plain text: " + plain
 text = RailFence.new(key)
 
 rfEncrypted = text.encrypt(plain)
-
-rfDecrypted = text.decrypt(rfEncrypted)
+rfDecrypted = text.decrypt
 
 puts rfEncrypted
 puts rfDecrypted
