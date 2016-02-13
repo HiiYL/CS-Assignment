@@ -13,7 +13,7 @@ if decision == 1
 
 elsif decision == 2
 	puts "Please input your plaintext"
-	plaintext = gets
+	@plaintext = gets
 
 end
 
@@ -26,15 +26,15 @@ while decision2=='y'
 		puts "Please input the key: "
 		key = gets.chomp
 		text = Caesar.new(key)
-		@plaintext = text.encrypt(plaintext)
-		puts @plaintext
+		output = text.encrypt(@plaintext)
+		puts output
 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
 		key = gets.chomp.to_i
 		text = RailFence.new(key)
-		@plaintext = text.encrypt(plaintext)
-		puts @plaintext
+		output = text.encrypt(@plaintext)
+		puts output
 	end
 
 	puts "Press y to encrypt again, n to end the encryption"
