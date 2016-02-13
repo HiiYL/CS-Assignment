@@ -37,7 +37,8 @@ class RailFence
       i+=2*(@key-1)
     end
     output = @cipher.join()
-    puts "Encrpyted: " + output
+
+  
   end
 
   def decrypt(plain)
@@ -57,6 +58,6 @@ class RailFence
       counter -= 1
     end 
     output = @decipher.join()
-    puts "Decrypted: " + output
+
   end
 end
