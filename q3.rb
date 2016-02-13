@@ -26,7 +26,7 @@ while decision2=='y'
 		puts "Please input the key: "
 		key = gets.chomp
 		text = Caesar.new(key)
-		@plaintext = text.encrypt(@plaintext)
+		@plaintext = text.encrypt(plaintext)
 		puts @plaintext
 
 	elsif decisionToEncrypt == 2
