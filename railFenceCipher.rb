@@ -11,7 +11,7 @@ class RailFence
 
   #loop below is to loop from top to 2nd bottom case
   def encrypt(plain)
-    plain = plain.gsub(" ", "")
+    plain = plain.gsub(" ", "") unless plain.nil?
     plain_len = plain.length-1
     while @cur_line < @key-1 
       #loop through each level in rail fence

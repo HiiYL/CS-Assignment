@@ -26,15 +26,15 @@ while decision2=='y'
 		puts "Please input the key: "
 		key = gets.chomp
 		text = Caesar.new(key)
-		plaintext = text.encrypt(plaintext)
-		puts plaintext
+		@plaintext = text.encrypt(@plaintext)
+		puts @plaintext
 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
 		key = gets.chomp.to_i
 		text = RailFence.new(key)
-		plaintext = text.encrypt(plaintext)
-		puts plaintext
+		@plaintext = text.encrypt(plaintext)
+		puts @plaintext
 	end
 
 	puts "Press y to encrypt again, n to end the encryption"
