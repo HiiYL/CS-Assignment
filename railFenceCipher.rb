@@ -54,19 +54,24 @@ class RailFence
       l=0
       # start 2nd layer looping
       while n < cipher_len
+        # skipped array equal to cipher array 0,1,2,3,m+1...
         @decipher[n]=@cipher[m]
         m=m+1
+        # if first n is equal to n+skip or if even number time of loop n+skip
         if (@cur_line2==0 || l%2 == 0)
           n=n+@skip
         else 
+        # else if current line is odd
           n=n+2*(@key-1)-@skip
         end
+        # increment of loop time
         l=l+1
       end
+      # increment of 1st layer of loop
       @cur_line2=@cur_line2+1
     end
 
-  
+    # loop below is to wrap the most bottom case
     i=@cur_line2
     while i < cipher_len
       @decipher[i]= @cipher[m]
