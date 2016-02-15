@@ -30,8 +30,12 @@ while decision2=='y'
 		text = Caesar.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
+				@decrypted = text.decrypt(@encrypted)
+				
 			else
-				@encrypted = text.encrypt(@encrypted)
+				@encrypted = text.encrypt(@plaintext)
+				@encrypted = text.decrypt(@encrypted)
+				puts "test: " + @encrypted
 			end
 
 
@@ -41,11 +45,13 @@ while decision2=='y'
 		text = RailFence.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
+				@decrypted = text.decrypt(@encrypted)
 			else
 				if @encrypted.nil?
 					puts "null"
 				end
 				@encrypted = text.encrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)	
 			end
 
 	end

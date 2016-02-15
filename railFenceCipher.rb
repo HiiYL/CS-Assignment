@@ -47,7 +47,7 @@ class RailFence
     return output
   end
 
-  def decrypt
+  def decrypt(cipher)
     # init (test)
     cipher_len = @cipher.length
     m=0
@@ -75,15 +75,6 @@ class RailFence
       # increment of 1st layer of loop
       @cur_line2=@cur_line2+1
     end
-
-    while counter != 1
-      if counter%2 == 0
-        @decipher.push(@cipher[counter])
-      end
-      counter -= 1
-    end 
-    output = @decipher.join()
-
 
     # loop below is to wrap the most bottom case
     i=@cur_line2
