@@ -179,7 +179,7 @@ elsif decision_cipher == 2
 
 			puts @decryptedText
 		# railFence decrytion
-		elsif decision==2 
+		elsif decision2==2 
 			puts "Please input the key: "
 			key = gets.chomp.to_i
 			text = RailFence.new(key)
@@ -190,7 +190,7 @@ elsif decision_cipher == 2
 			end
 		end
 
-		puts "Press 2 for further decryption"
+		puts "\nPress 2 for further decryption"
 		decision_cipher = gets.chomp.to_i
 		repeatOps = 'y'
 	end
