@@ -67,22 +67,11 @@ if decision_cipher == 1
 					# first encryption using plain text
 					if continue_encrypt == false
 						@encrypted = text.encrypt(@plaintext)
-<<<<<<< HEAD
 						puts "\nEncrypted: " + @encrypted
 					# following encryption using previous cipher text
 					else
 						@encrypted = text.encrypt(@encrypted)
 						puts "\nEncrpted: " + @encrypted		
-=======
-						@decrypted = text.decrypt(@encrypted)
-						puts "Encrypted: " + @encrypted
-						puts "Decrypted: " + @decrypted
-					else
-						@encrypted = text.encrypt(@encrypted)
-						@decrypted = text.decrypt(@encrypted)
-						puts "Encrpted: " + @encrypted
-						puts "Decrypted: " + @decrypted
->>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
 					end
 
 				# ask user whether they want to export the cipher text
@@ -119,14 +108,13 @@ if decision_cipher == 1
 					File.write('Encrypted(railFenceCipher).txt', @encrypted)
 				end
 			end
-<<<<<<< HEAD
+
 			# ask user whether they want to continue the encrpytion
 			puts "-----------------------------------------------"
 			puts "Do you want to continue the encryption (y/n)"
 			decision2 = gets.chomp
 			continue_encrypt = true
-=======
->>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
+
 		end
 	else
 		# interactive mode disabled
@@ -164,11 +152,7 @@ if decision_cipher == 1
 		end
 	end
 
-<<<<<<< HEAD
-	# decryption
-=======
 # Decryption option	
->>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
 elsif decision_cipher == 2
 	repeatOps = 'n'
 	while decision_cipher == 2
