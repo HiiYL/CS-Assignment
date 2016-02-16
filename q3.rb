@@ -69,16 +69,14 @@ if decision_cipher == 1
 				key = gets.chomp
 				# init key to KeyCipher class
 				text = KeyCipher.new(key)
+					# first encryption using plain text
 					if continue_encrypt == false
 						@encrypted = text.encrypt(@plaintext)
-						@decrypted = text.decrypt(@encrypted)
 						puts "\nEncrypted: " + @encrypted
-						puts "Decrypted: " + @decrypted
+					# following encryption using previous cipher text
 					else
 						@encrypted = text.encrypt(@encrypted)
-						@decrypted = text.decrypt(@encrypted)
-						puts "\nEncrpted: " + @encrypted
-						puts "Decrypted: " + @decrypted
+						puts "\nEncrpted: " + @encrypted		
 					end
 
 				# ask user whether they want to export the cipher text
@@ -93,63 +91,76 @@ if decision_cipher == 1
 
 			# railFence cipher 
 			elsif decisionToEncrypt == 2
+				# get key from user input 
 				puts "Please input the key: "
 				key = gets.chomp.to_i
+				# init key to RailFence class
 				text = RailFence.new(key)
+				# first encryption using plain text
 				if continue_encrypt == false
 					@encrypted = text.encrypt(@plaintext)
-					@decrypted = text.decrypt(@encrypted)				
+				# following encryption using previous cipher text	
 				else
 					@encrypted = text.encrypt(@encrypted)
-					@decrypted = text.decrypt(@encrypted)	
 				end
+
+				# ask user whether they want to export the cipher text
 				puts "Do you want to export encrypted text? (y/n)"
 				export = gets.chomp
 
+				# export cipher text
 				if export == 'y'
 					File.write('Encrypted(railFenceCipher).txt', @encrypted)
 					puts "\nExported to Encrypted(railFenceCipher).txt"
 				end
 			end
+			# ask user whether they want to continue the encrpytion
 			puts "-----------------------------------------------"
 			puts "Do you want to continue the encryption (y/n)"
 			decision2 = gets.chomp
 			continue_encrypt = true
 		end
 	else
+		# interactive mode disabled
+		# -n file_name option
 		if options[:input_filename] != ""
 			@plaintext = IO.read(options[:input_filename])
 		else
+		# -t plaintext option
 			@plaintext = options[:text]
 		end
 
-		# puts @plaintext
+		# init -k key to keyCipher
 		keyCipher = KeyCipher.new(options[:ky_key])
 		
-
+		# init first text 
 		@encrypted = @plaintext
+
+		# -e encryption_method 
 		for character in options[:encryption_method].split("")
 			puts character
+			# option k for keycipher
 			if character == 'k'
 				@encrypted = keyCipher.encrypt(@encrypted)
-				@decrypted = keyCipher.decrypt(@encrypted)
 				puts "Encrypted: " + @encrypted
-				puts "Decrypted: " + @decrypted
+			# option r for railFencecipher
 			elsif character == 'r'
 				rfCipher = RailFence.new(options[:rf_key])
 				@encrypted = rfCipher.encrypt(@encrypted)
-				@decrypted = rfCipher.decrypt(@encrypted)
 				puts "Encrypted WTF:  " + @encrypted
-				puts "Decrypted WTF: " + @decrypted
 			end
 		end
-
+		# -o outputfilepath option
 		if options[:output_filename] != ""
 			File.write(options[:output_filename], @encrypted)
 		end
 	end
+
+	# decryption
 elsif decision_cipher == 2
 	while decision_cipher == 2
+
+		# get file text from user input
 		puts "Please enter the path of your file"
 		filename = gets.chomp
 		@encryptedText = IO.read(filename)
@@ -157,13 +168,16 @@ elsif decision_cipher == 2
 		puts "1- Key Decryption"
 		puts "2- RailFence Decryption"
 		decision2 = gets.chomp.to_i
+
+		# keyCipher decrpytion
 		if decision2==1
 			puts "Please input the key: "
 			key = gets.chomp
 			text = KeyCipher.new(key)
 			@decryptedText = text.decrypt(@encryptedText)
 			puts @decryptedText
-		else 
+		# railFence decrytion
+		elsif decision==2 
 			puts "Please input the key: "
 			key = gets.chomp.to_i
 			text = RailFence.new(key)
