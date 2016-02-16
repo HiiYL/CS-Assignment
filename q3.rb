@@ -53,6 +53,11 @@ while decision2=='y'
 		puts "Do you want to export encrypted text? (y/n)"
 		export = gets.chomp
 
+
+		# ask user whether they want to export the cipher text
+		puts "Do you want to export encrypted text? (y/n)"
+		export = gets.chomp
+
 		# export cipher text 
 			if export == 'y'
 				File.write('Encrypted(keyCipher).txt', @encrypted)
