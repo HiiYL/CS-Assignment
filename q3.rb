@@ -43,18 +43,22 @@ while decision2=='y'
 				puts "Decrypted: " + @decrypted
 			else
 				@encrypted = text.encrypt(@encrypted)
-				@encrypted = text.decrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)
 				puts "Encrpted: " + @encrypted
 				puts "Decrypted: " + @decrypted
 			end
+
+		# ask user whether they want to export the cipher text
 		puts "Do you want to export encrypted text? (y/n)"
 		export = gets.chomp
 
+		# export cipher text 
 			if export == 'y'
 				File.write('Encrypted(keyCipher).txt', @encrypted)
 				puts "Exported to Encrypted(railFenceCipher).txt"
 			end
 
+	# railFence cipher 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
 		key = gets.chomp.to_i
