@@ -41,17 +41,8 @@ while decision2=='y'
 				@decrypted = text.decrypt(@encrypted)
 				puts "Encrypted: " + @encrypted
 				puts "Decrypted: " + @decrypted
-
-				puts "Do you want to export encrypted text? (y/n)"
-				export = gets.chomp
-
-					if export == 'y'
-						File.write('Encrypted(keyCipher).txt', @encrypted)
-						puts "Exported to Encrypted(keyCipher).txt"
-					end
-
 			else
-				@encrypted = text.encrypt(@plaintext)
+				@encrypted = text.encrypt(@encrypted)
 				@encrypted = text.decrypt(@encrypted)
 				puts "Encrpted: " + @encrypted
 				puts "Decrypted: " + @decrypted
