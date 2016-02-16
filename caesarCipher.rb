@@ -8,11 +8,11 @@ class Caesar
   end
 
   def encrypt(string)
-    puts string.downcase.tr(@decrypt,@encrypt)
+    return string.downcase.tr(@decrypt,@encrypt)
   end
 
   def decrypt(string)
-    puts string.downcase.tr(@encrypt, @decrypt)
+    return string.downcase.tr(@encrypt, @decrypt)
   end
 
   def encrypt_with_ask()

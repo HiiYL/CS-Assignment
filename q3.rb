@@ -1,9 +1,11 @@
+# include both cipher 
 require_relative 'caesarCipher'
 require_relative 'railFenceCipher'
 
-#init
+# init
 continue_encrypt = false
 
+# 
 puts  "==============================="
 puts  "======Combination Script======="
 puts  "==============================="
@@ -11,8 +13,14 @@ puts  "==============================="
 puts "Press 1 for text file input"
 puts "Press 2 for string input"
 
+# get decision from users 
 decision = gets.chomp.to_i
+
+# 
 if decision == 1
+	puts "Please enter the path of your file"
+	filename = gets
+	@plaintext = IO.read(filename)
 
 elsif decision == 2
 	puts "Please input your plaintext"
@@ -31,13 +39,14 @@ while decision2=='y'
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
 				@decrypted = text.decrypt(@encrypted)
-				
+				puts "Encrypted: " + @encrypted
+				puts "Decrypted: " + @decrypted
 			else
 				@encrypted = text.encrypt(@plaintext)
 				@encrypted = text.decrypt(@encrypted)
-				puts "test: " + @encrypted
+				puts "Encrpted: " + @encrypted
+				puts "Decrypted: " + @decrypted
 			end
-
 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
@@ -47,9 +56,6 @@ while decision2=='y'
 				@encrypted = text.encrypt(@plaintext)
 				@decrypted = text.decrypt(@encrypted)
 			else
-				if @encrypted.nil?
-					puts "null"
-				end
 				@encrypted = text.encrypt(@encrypted)
 				@decrypted = text.decrypt(@encrypted)	
 			end
