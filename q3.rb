@@ -1,5 +1,5 @@
 # include both cipher 
-require_relative 'caesarCipher'
+require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
 # init
@@ -29,13 +29,13 @@ end
 
 decision2 = 'y'
 while decision2=='y'
-	puts "Press 1 for Caesar Cipher Encryption"
+	puts "Press 1 for Key Cipher Encryption"
 	puts "Press 2 for Rail Fence Cipher Encryption"
 	decisionToEncrypt = gets.chomp.to_i
 	if decisionToEncrypt == 1
 		puts "Please input the key: "
 		key = gets.chomp
-		text = Caesar.new(key)
+		text = KeyCipher.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
 				@decrypted = text.decrypt(@encrypted)
