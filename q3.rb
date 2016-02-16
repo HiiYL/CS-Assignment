@@ -41,11 +41,27 @@ while decision2=='y'
 				@decrypted = text.decrypt(@encrypted)
 				puts "Encrypted: " + @encrypted
 				puts "Decrypted: " + @decrypted
+
+				puts "Do you want to export encrypted text? (y/n)"
+				export = gets.chomp
+
+					if export == 'y'
+						File.write('Encrypted(keyCipher).txt', @encrypted)
+						puts "Exported to Encrypted(keyCipher).txt"
+					end
+
 			else
 				@encrypted = text.encrypt(@plaintext)
 				@encrypted = text.decrypt(@encrypted)
 				puts "Encrpted: " + @encrypted
 				puts "Decrypted: " + @decrypted
+			end
+		puts "Do you want to export encrypted text? (y/n)"
+		export = gets.chomp
+
+			if export == 'y'
+				File.write('Encrypted(keyCipher).txt', @encrypted)
+				puts "Exported to Encrypted(railFenceCipher).txt"
 			end
 
 	elsif decisionToEncrypt == 2
@@ -54,10 +70,16 @@ while decision2=='y'
 		text = RailFence.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
-				@decrypted = text.decrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)				
 			else
 				@encrypted = text.encrypt(@encrypted)
 				@decrypted = text.decrypt(@encrypted)	
+			end
+		puts "Do you want to export encrypted text? (y/n)"
+		export = gets.chomp
+
+			if export == 'y'
+				File.write('Encrypted(railFenceCipher).txt', @encrypted)
 			end
 
 	end
