@@ -1,10 +1,9 @@
-# include both cipher 
+# include both cipher library 
 require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
-# include non interactive mode library
+# include option parse library
 require 'micro-optparse'
-
 
 # user interface
 puts  "==============================="
@@ -32,9 +31,6 @@ if decision == 1
 	  p.option :ky_key, "key for key cipher", default: "kappa"
 	  p.option :text, "text to encrypt", default: ""
 	end.process!
-
-
-# non interactive mode -help 
 
 options = Parser.new do |p|
   p.version = "fancy script version 1.0"
@@ -138,99 +134,6 @@ end.process!
 				continue_encrypt = true
 			end
 
-
-puts  "==============================="
-puts  "======== Cipher System ========"
-puts  "==============================="
-
-puts "Press 1 for Encryption"
-puts "Press 2 for Decryption"
-
-# get user selection
-decision_cipher = gets.chomp.to_i
-
-# encryption 
-if decision_cipher == 1
-	if options[:interactive]
-	puts  "==============================="
-	puts  "======Combination Script======="
-	puts  "==============================="
-
-	# non interactive option -i. 
-	
-		puts "Press 1 for text file input"
-		puts "Press 2 for string input"
-
-		# get decision from users 
-		decision = gets.chomp.to_i
-
-		# 
-		if decision == 1
-			puts "Please enter the path of your file"
-			filename = gets.chomp
-			@plaintext = IO.read(filename)
-
-		elsif decision == 2
-			puts "Please input your plaintext"
-			@plaintext = gets
-		end
-		decision2 = 'y'
-		while decision2=='y'
-			puts "Press 1 for Key Cipher Encryption"
-			puts "Press 2 for Rail Fence Cipher Encryption"
-			decisionToEncrypt = gets.chomp.to_i
-			if decisionToEncrypt == 1
-				puts "Please input the key: "
-				key = gets.chomp
-				text = KeyCipher.new(key)
-					if continue_encrypt == false
-						@encrypted = text.encrypt(@plaintext)
-						@decrypted = text.decrypt(@encrypted)
-						puts "Encrypted: " + @encrypted
-						puts "Decrypted: " + @decrypted
-					else
-						@encrypted = text.encrypt(@encrypted)
-						@decrypted = text.decrypt(@encrypted)
-						puts "Encrpted: " + @encrypted
-						puts "Decrypted: " + @decrypted
-					end
-
-				# ask user whether they want to export the cipher text
-				puts "Do you want to export encrypted text? (y/n)"
-				export = gets.chomp
-
-				# export cipher text 
-				if export == 'y'
-					File.write('Encrypted(keyCipher).txt', @encrypted)
-					puts "Exported to Encrypted(railFenceCipher).txt"
-				end
-
-			# railFence cipher 
-			elsif decisionToEncrypt == 2
-				puts "Please input the key: "
-				key = gets.chomp.to_i
-				text = RailFence.new(key)
-				if continue_encrypt == false
-					@encrypted = text.encrypt(@plaintext)
-					@decrypted = text.decrypt(@encrypted)				
-				else
-					@encrypted = text.encrypt(@encrypted)
-					@decrypted = text.decrypt(@encrypted)	
-				end
-				puts "Do you want to export encrypted text? (y/n)"
-				export = gets.chomp
-
-				if export == 'y'
-					File.write('Encrypted(railFenceCipher).txt', @encrypted)
-				end
-			end
-		end
-	else
-		if options[:input_filename] != ""
-			@plaintext = IO.read(options[:input_filename])
-		else
-			@plaintext = options[:text]
-
 		end
 	else
 		if options[:input_filename] != ""
@@ -263,7 +166,6 @@ if decision_cipher == 1
 		if options[:output_filename] != ""
 			File.write(options[:output_filename], @encrypted)
 
-
 		end
 	end	
 
@@ -271,12 +173,6 @@ elsif decision == 2
 
 	
 	while decision == 2
-
-		end
-	end
-elsif decision_cipher == 2
-	while decision_cipher == 2
-
 		puts "Please enter the path of your file"
 		filename = gets.chomp
 		@encryptedText = IO.read(filename)
@@ -298,7 +194,6 @@ elsif decision_cipher == 2
 		end
 
 		puts "Press 2 for further decryption"
-
 		decision = gets.chomp.to_i
 
 
@@ -358,11 +253,6 @@ end
 
 
 
-
-
-		decision_cipher = gets.chomp.to_i
-	end
-end
 
 	
 
