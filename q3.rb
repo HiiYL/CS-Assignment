@@ -1,23 +1,25 @@
-# include both cipher 
+# include both cipher library 
 require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
+# include option parse library
 require 'micro-optparse'
 
-
-# 
+# user interface
 puts  "==============================="
-puts  "======Combination Script======="
+puts  "======= Cipher System ========="
 puts  "==============================="
 
 puts "Press 1 for Encryption"
 puts "Press 2 for Decryption"
 
+# get input from user 
 decision = gets.chomp.to_i
 
 if decision == 1
 	puts "Press 1 for text file input"
 	puts "Press 2 for string input"
+
 
 	options = Parser.new do |p|
 	  p.version = "fancy script version 1.0"
@@ -29,6 +31,18 @@ if decision == 1
 	  p.option :ky_key, "key for key cipher", default: "kappa"
 	  p.option :text, "text to encrypt", default: ""
 	end.process!
+
+options = Parser.new do |p|
+  p.version = "fancy script version 1.0"
+  p.option :interactive, "turn on interactive mode"
+  p.option :encryption_method, "defines what encryption and in what order [ k - key cipher ] [ r - railfence ]", default: "", value_matches: /[k|r]*/i
+  p.option :input_filename, "input file to process", :default => ""
+  p.option :output_filename, "output file for encrpyted", :default => ""
+  p.option :rf_key, "key for railfence", default: 123
+  p.option :ky_key, "key for key cipher", default: "kappa"
+  p.option :text, "text to encrypt", default: ""
+end.process!
+
 
 # init
 	continue_encrypt = false
