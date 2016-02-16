@@ -19,7 +19,7 @@ decision = gets.chomp.to_i
 # 
 if decision == 1
 	puts "Please enter the path of your file"
-	filename = gets
+	filename = gets.chomp
 	@plaintext = IO.read(filename)
 
 elsif decision == 2
