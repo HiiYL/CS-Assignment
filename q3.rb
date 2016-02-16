@@ -32,32 +32,29 @@ decision_cipher = gets.chomp.to_i
 
 # encryption 
 if decision_cipher == 1
-	# -i interactive mode enabled 
 	if options[:interactive]
-		puts  "==============================="
-		puts  "======Combination Script======="
-		puts  "==============================="
-		
+	puts  "==============================="
+	puts  "======Combination Script======="
+	puts  "==============================="
+
+	# non interactive option -i. 
+	
 		puts "Press 1 for text file input"
 		puts "Press 2 for string input"
 
 		# get decision from users 
 		decision = gets.chomp.to_i
 
+		# 
 		if decision == 1
 			puts "Please enter the path of your file"
-			# get file path
 			filename = gets.chomp
-			# get string from file
 			@plaintext = IO.read(filename)
 
 		elsif decision == 2
 			puts "Please input your plaintext"
-			# get string from user input
 			@plaintext = gets
 		end
-
-		# init variable for continue encrypt decision
 		decision2 = 'y'
 		while decision2=='y'
 			puts "Press 1 for Key Cipher Encryption"
@@ -65,18 +62,27 @@ if decision_cipher == 1
 			decisionToEncrypt = gets.chomp.to_i
 			if decisionToEncrypt == 1
 				puts "Please input the key: "
-				# get key from user input
 				key = gets.chomp
-				# init key to KeyCipher class
 				text = KeyCipher.new(key)
 					# first encryption using plain text
 					if continue_encrypt == false
 						@encrypted = text.encrypt(@plaintext)
+<<<<<<< HEAD
 						puts "\nEncrypted: " + @encrypted
 					# following encryption using previous cipher text
 					else
 						@encrypted = text.encrypt(@encrypted)
 						puts "\nEncrpted: " + @encrypted		
+=======
+						@decrypted = text.decrypt(@encrypted)
+						puts "Encrypted: " + @encrypted
+						puts "Decrypted: " + @decrypted
+					else
+						@encrypted = text.encrypt(@encrypted)
+						@decrypted = text.decrypt(@encrypted)
+						puts "Encrpted: " + @encrypted
+						puts "Decrypted: " + @decrypted
+>>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
 					end
 
 				# ask user whether they want to export the cipher text
@@ -86,7 +92,7 @@ if decision_cipher == 1
 				# export cipher text 
 				if export == 'y'
 					File.write('Encrypted(keyCipher).txt', @encrypted)
-					puts "Exported to Encrypted(keyCipher).txt"
+					puts "Exported to Encrypted(railFenceCipher).txt"
 				end
 
 			# railFence cipher 
@@ -111,14 +117,16 @@ if decision_cipher == 1
 				# export cipher text
 				if export == 'y'
 					File.write('Encrypted(railFenceCipher).txt', @encrypted)
-					puts "\nExported to Encrypted(railFenceCipher).txt"
 				end
 			end
+<<<<<<< HEAD
 			# ask user whether they want to continue the encrpytion
 			puts "-----------------------------------------------"
 			puts "Do you want to continue the encryption (y/n)"
 			decision2 = gets.chomp
 			continue_encrypt = true
+=======
+>>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
 		end
 	else
 		# interactive mode disabled
@@ -156,8 +164,13 @@ if decision_cipher == 1
 		end
 	end
 
+<<<<<<< HEAD
 	# decryption
+=======
+# Decryption option	
+>>>>>>> 362f7af26e93240de5ae80ef774d51b8b64faaf1
 elsif decision_cipher == 2
+	repeatOps = 'n'
 	while decision_cipher == 2
 
 		# get file text from user input
@@ -174,18 +187,28 @@ elsif decision_cipher == 2
 			puts "Please input the key: "
 			key = gets.chomp
 			text = KeyCipher.new(key)
-			@decryptedText = text.decrypt(@encryptedText)
+			if repeatOps == 'n'
+				@decryptedText = text.decrypt(@encryptedText)
+			else
+				@decryptedText = text.decrypt(@decryptedText)
+			end
+
 			puts @decryptedText
 		# railFence decrytion
 		elsif decision==2 
 			puts "Please input the key: "
 			key = gets.chomp.to_i
 			text = RailFence.new(key)
-			@decryptedText = text.decrypt(@encryptedText)
+			if repeatOps =='n'
+				@decryptedText = text.decrypt(@encryptedText)
+			else
+				@decryptedText = text.decrypt(@decryptedText)
+			end
 		end
 
 		puts "Press 2 for further decryption"
 		decision_cipher = gets.chomp.to_i
+		repeatOps = 'y'
 	end
 end
 	
