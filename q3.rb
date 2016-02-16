@@ -1,10 +1,28 @@
-# include both cipher library
+# include both cipher 
 require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
 require 'micro-optparse'
 
 
+
+options = Parser.new do |p|
+  p.version = "fancy script version 1.0"
+  p.option :interactive, "turn on interactive mode"
+  p.option :encryption_method, "defines what encryption and in what order [ k - key cipher ] [ r - railfence ]", default: "", value_matches: /[k|r]*/i
+  p.option :input_filename, "input file to process", :default => ""
+  p.option :output_filename, "output file for encrpyted", :default => ""
+  p.option :rf_key, "key for railfence", default: 123
+  p.option :ky_key, "key for key cipher", default: "kappa"
+  p.option :text, "text to encrypt", default: ""
+end.process!
+
+# init
+continue_encrypt = false
+
+puts options
+
+#
 puts  "==============================="
 puts  "======Combination Script======="
 puts  "==============================="
