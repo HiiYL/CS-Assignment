@@ -81,7 +81,7 @@ if decision_cipher == 1
 				# export cipher text 
 				if export == 'y'
 					File.write('Encrypted(keyCipher).txt', @encrypted)
-					puts "Exported to Encrypted(railFenceCipher).txt"
+					puts "Exported to Encrypted(keyCipher).txt"
 				end
 
 			# railFence cipher 
@@ -106,6 +106,7 @@ if decision_cipher == 1
 				# export cipher text
 				if export == 'y'
 					File.write('Encrypted(railFenceCipher).txt', @encrypted)
+					puts "Exported to Encrypted(railFenceCipher).txt"
 				end
 			end
 
@@ -155,14 +156,17 @@ if decision_cipher == 1
 # Decryption option	
 elsif decision_cipher == 2
 	repeatOps = 'n'
+	continue_decrypt = false
 	while decision_cipher == 2
 
+		if continue_decrypt == false
 		# get file text from user input
 		puts "Please enter the path of your file"
 		filename = gets.chomp
 		@encryptedText = IO.read(filename)
-		
-		puts "1- Key Decryption"
+		end
+
+		puts "\n1- Key Decryption"
 		puts "2- RailFence Decryption"
 		decision2 = gets.chomp.to_i
 
@@ -193,6 +197,7 @@ elsif decision_cipher == 2
 		puts "\nPress 2 for further decryption"
 		decision_cipher = gets.chomp.to_i
 		repeatOps = 'y'
+		continue_decrypt = true
 	end
 end
 	
