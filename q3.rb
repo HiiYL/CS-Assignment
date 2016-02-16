@@ -33,6 +33,7 @@ while decision2=='y'
 			else
 				@encrypted = text.encrypt(@encrypted)
 			end
+		puts @encrypted
 
 
 	elsif decisionToEncrypt == 2
