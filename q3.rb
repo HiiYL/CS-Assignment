@@ -1,11 +1,11 @@
-# include both cipher 
+# include both cipher library
 require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
 # init
 continue_encrypt = false
 
-# 
+# display user interface
 puts  "==============================="
 puts  "======Combination Script======="
 puts  "==============================="
@@ -16,12 +16,13 @@ puts "Press 2 for string input"
 # get decision from users 
 decision = gets.chomp.to_i
 
-# 
+# read file 
 if decision == 1
 	puts "Please enter the path of your file"
 	filename = gets.chomp
 	@plaintext = IO.read(filename)
 
+# read plain text
 elsif decision == 2
 	puts "Please input your plaintext"
 	@plaintext = gets

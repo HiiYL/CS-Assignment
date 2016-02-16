@@ -1,5 +1,6 @@
 class RailFence
   
+  # init 
   def initialize(key)
     @cipher=[]
     @decipher = []
@@ -9,23 +10,30 @@ class RailFence
     @key = key 
   end
 
-  #loop below is to loop from top to 2nd bottom case
   def encrypt(plain)
     plain = plain.gsub(" ", "") unless plain.nil?
     plain_len = plain.length
+
+    # loop below 
     while @cur_line < @key-1 
-      #loop through each level in rail fence
+      # below is the formula to get the number of skip
       @skip=2*(@key-@cur_line-1)
-      #how many numbers to skip in rail fence
+      
+      # init
       j=0
       i=@cur_line
+
+      # start looping row by row 
       while i < plain_len
+        # push the current row first text to cipher array 
         @cipher.push(plain[i])
+        # if the cuurrent number of row is even or current row is the first row, skip
         if (@cur_line==0 || j%2 == 0)
           i=i+@skip
         else 
           i=i+2*(@key-1)-@skip
         end
+        # increase counter to check even or odd row 
         j=j+1
       end
       @cur_line=@cur_line+1
