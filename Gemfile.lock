@@ -1,0 +1,12 @@
+GEM
+  specs:
+    micro-optparse (1.2.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  micro-optparse
+
+BUNDLED WITH
+   1.10.6
