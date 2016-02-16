@@ -1,9 +1,11 @@
-require_relative 'caesarCipher'
+# include both cipher 
+require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
-#init
+# init
 continue_encrypt = false
 
+# 
 puts  "==============================="
 puts  "======Combination Script======="
 puts  "==============================="
@@ -11,8 +13,14 @@ puts  "==============================="
 puts "Press 1 for text file input"
 puts "Press 2 for string input"
 
+# get decision from users 
 decision = gets.chomp.to_i
+
+# 
 if decision == 1
+	puts "Please enter the path of your file"
+	filename = gets.chomp
+	@plaintext = IO.read(filename)
 
 elsif decision == 2
 	puts "Please input your plaintext"
@@ -21,32 +29,53 @@ end
 
 decision2 = 'y'
 while decision2=='y'
-	puts "Press 1 for Caesar Cipher Encryption"
+	puts "Press 1 for Key Cipher Encryption"
 	puts "Press 2 for Rail Fence Cipher Encryption"
 	decisionToEncrypt = gets.chomp.to_i
 	if decisionToEncrypt == 1
 		puts "Please input the key: "
 		key = gets.chomp
-		text = Caesar.new(key)
+		text = KeyCipher.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
+				@decrypted = text.decrypt(@encrypted)
+				puts "Encrypted: " + @encrypted
+				puts "Decrypted: " + @decrypted
 			else
 				@encrypted = text.encrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)
+				puts "Encrpted: " + @encrypted
+				puts "Decrypted: " + @decrypted
 			end
 		puts @encrypted
 
+		# ask user whether they want to export the cipher text
+		puts "Do you want to export encrypted text? (y/n)"
+		export = gets.chomp
 
+		# export cipher text 
+			if export == 'y'
+				File.write('Encrypted(keyCipher).txt', @encrypted)
+				puts "Exported to Encrypted(railFenceCipher).txt"
+			end
+
+	# railFence cipher 
 	elsif decisionToEncrypt == 2
 		puts "Please input the key: "
 		key = gets.chomp.to_i
 		text = RailFence.new(key)
 			if continue_encrypt == false
 				@encrypted = text.encrypt(@plaintext)
+				@decrypted = text.decrypt(@encrypted)				
 			else
-				if @encrypted.nil?
-					puts "null"
-				end
 				@encrypted = text.encrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)	
+			end
+		puts "Do you want to export encrypted text? (y/n)"
+		export = gets.chomp
+
+			if export == 'y'
+				File.write('Encrypted(railFenceCipher).txt', @encrypted)
 			end
 
 	end
