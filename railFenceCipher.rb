@@ -43,13 +43,13 @@ class RailFence
     # remove new line from string
     @cipher = @cipher.delete("\n")
     output = @cipher
-    puts "Encrpyted: " + output
+    puts "Encrypted: " + output
     return output
   end
 
   def decrypt(cipher)
     # init (test)
-    cipher_len = @cipher.length
+    cipher_len = cipher.length
     m=0
 
     # start looping
@@ -60,7 +60,7 @@ class RailFence
       # start 2nd layer looping
       while n < cipher_len
         # skipped array equal to cipher array 0,1,2,3,m+1...
-        @decipher[n]=@cipher[m]
+        @decipher[n]=cipher[m]
         m=m+1
         # if first n is equal to n+skip or if even number time of loop n+skip
         if (@cur_line2==0 || l%2 == 0)
@@ -79,13 +79,13 @@ class RailFence
     # loop below is to wrap the most bottom case
     i=@cur_line2
     while i < cipher_len
-      @decipher[i]= @cipher[m]
+      @decipher[i]= cipher[m]
       i+=2*(@key-1)
       m=m+1
     end
     @decipher = @decipher.join()
     output = @decipher
-    puts "Decrpyted: " + output
+    puts "Decrypted: " + output
     return output
   end
 end
