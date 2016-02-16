@@ -51,7 +51,7 @@ class RailFence
     # remove new line from string
     @cipher = @cipher.delete("\n")
     output = @cipher
-    puts "Encrpyted: " + output
+    # puts "Encrpyted: " + output
     return output
   end
 
@@ -93,7 +93,7 @@ class RailFence
     end
     @decipher = @decipher.join()
     output = @decipher
-    puts "Decrpyted: " + output
+    # puts "Decrpyted: " + output
     return output
   end
 end
