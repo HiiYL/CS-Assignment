@@ -20,7 +20,6 @@ end.process!
 # init
 continue_encrypt = false
 
-# user interface
 puts  "==============================="
 puts  "======== Cipher System ========"
 puts  "==============================="
@@ -28,14 +27,18 @@ puts  "==============================="
 puts "Press 1 for Encryption"
 puts "Press 2 for Decryption"
 
+# get user selection
 decision_cipher = gets.chomp.to_i
 
+# encryption 
 if decision_cipher == 1
-
+	if options[:interactive]
 	puts  "==============================="
 	puts  "======Combination Script======="
 	puts  "==============================="
-	if options[:interactive]
+
+	# non interactive option -i. 
+	
 		puts "Press 1 for text file input"
 		puts "Press 2 for string input"
 
