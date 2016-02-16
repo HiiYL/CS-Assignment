@@ -80,8 +80,8 @@ if decision_cipher == 1
 
 				# export cipher text 
 				if export == 'y'
-					File.write('Encrypted(keyCipher).txt', @encrypted)
-					puts "Exported to Encrypted(keyCipher).txt"
+					File.write('encrypted-k', @encrypted)
+					puts "Exported to encrypted-k"
 				end
 
 			# railFence cipher 
@@ -105,8 +105,8 @@ if decision_cipher == 1
 
 				# export cipher text
 				if export == 'y'
-					File.write('Encrypted(railFenceCipher).txt', @encrypted)
-					puts "Exported to Encrypted(railFenceCipher).txt"
+					File.write('encrypted-rf', @encrypted)
+					puts "Exported to encrypted-rf"
 				end
 			end
 
