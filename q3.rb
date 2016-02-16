@@ -9,9 +9,9 @@ require 'micro-optparse'
 options = Parser.new do |p|
   p.version = "fancy script version 1.0"
   p.option :interactive, "turn on interactive mode"
-  p.option :encryption_method, "defines what encryption and in what order [ k - key cipher ] [ r - railfence ]", default: "kr", value_matches: /[k|r]*/i
-  p.option :input_filename, "input file to process", default: ""
-  p.option :output_filename, "output file for encrpyted", default: ""
+  p.option :encryption_method, "defines what encryption and in what order [ k - key cipher ] [ r - railfence ]", default: "", value_matches: /[k|r]*/i
+  p.option :input_filename, "input file to process", :default => ""
+  p.option :output_filename, "output file for encrpyted", :default => ""
   p.option :rf_key, "key for railfence", default: 123
   p.option :ky_key, "key for key cipher", default: "kappa"
   p.option :text, "text to encrypt", default: ""
@@ -43,7 +43,6 @@ if options[:interactive]
 		puts "Please input your plaintext"
 		@plaintext = gets
 	end
-
 	decision2 = 'y'
 	while decision2=='y'
 		puts "Press 1 for Key Cipher Encryption"
@@ -59,42 +58,50 @@ if options[:interactive]
 					puts "Encrypted: " + @encrypted
 					puts "Decrypted: " + @decrypted
 				else
-					@encrypted = text.encrypt(@plaintext)
-					@encrypted = text.decrypt(@encrypted)
+					@encrypted = text.encrypt(@encrypted)
+					@decrypted = text.decrypt(@encrypted)
 					puts "Encrpted: " + @encrypted
 					puts "Decrypted: " + @decrypted
 				end
 
+			# ask user whether they want to export the cipher text
+			puts "Do you want to export encrypted text? (y/n)"
+			export = gets.chomp
+
+			# export cipher text 
+			if export == 'y'
+				File.write('Encrypted(keyCipher).txt', @encrypted)
+				puts "Exported to Encrypted(railFenceCipher).txt"
+			end
+
+		# railFence cipher 
 		elsif decisionToEncrypt == 2
 			puts "Please input the key: "
 			key = gets.chomp.to_i
 			text = RailFence.new(key)
-				if continue_encrypt == false
-					@encrypted = text.encrypt(@plaintext)
-					@decrypted = text.decrypt(@encrypted)
-				else
-					@encrypted = text.encrypt(@encrypted)
-					@decrypted = text.decrypt(@encrypted)	
-				end
+			if continue_encrypt == false
+				@encrypted = text.encrypt(@plaintext)
+				@decrypted = text.decrypt(@encrypted)				
+			else
+				@encrypted = text.encrypt(@encrypted)
+				@decrypted = text.decrypt(@encrypted)	
+			end
+			puts "Do you want to export encrypted text? (y/n)"
+			export = gets.chomp
 
+			if export == 'y'
+				File.write('Encrypted(railFenceCipher).txt', @encrypted)
+			end
 		end
-
-		puts "Press y to encrypt again, n to end the encryption"
-		decision2 = gets.chomp
-
-
-		if decision2 == 'y'
-			continue_encrypt = true
-			
-		end
-
 	end
 else
-	if options[:input_filename]
-		@plaintext = options[:text]
-	else
+	if options[:input_filename] != ""
 		@plaintext = IO.read(options[:input_filename])
+	else
+		@plaintext = options[:text]
 	end
+
+	# puts @plaintext
 	keyCipher = KeyCipher.new(options[:ky_key])
 	
 
@@ -115,8 +122,9 @@ else
 		end
 	end
 
-	if options[:output_filename]
+	if options[:output_filename] != ""
 		File.write(options[:output_filename], @encrypted)
+	end
 end
 
 	
