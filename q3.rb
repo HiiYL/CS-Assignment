@@ -1,26 +1,24 @@
-# include both cipher 
+# include both cipher library 
 require_relative 'keyCipher'
 require_relative 'railFenceCipher'
 
+# include option parse library
 require 'micro-optparse'
 
-
-# 
+# user interface
 puts  "==============================="
-puts  "======Combination Script======="
+puts  "======= Cipher System ========="
 puts  "==============================="
 
 puts "Press 1 for Encryption"
 puts "Press 2 for Decryption"
 
+# get input from user 
 decision = gets.chomp.to_i
 
 if decision == 1
 	puts "Press 1 for text file input"
 	puts "Press 2 for string input"
-
-
-
 
 options = Parser.new do |p|
   p.version = "fancy script version 1.0"
