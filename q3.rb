@@ -32,29 +32,32 @@ decision_cipher = gets.chomp.to_i
 
 # encryption 
 if decision_cipher == 1
+	# -i interactive mode enabled 
 	if options[:interactive]
-	puts  "==============================="
-	puts  "======Combination Script======="
-	puts  "==============================="
-
-	# non interactive option -i. 
-	
+		puts  "==============================="
+		puts  "======Combination Script======="
+		puts  "==============================="
+		
 		puts "Press 1 for text file input"
 		puts "Press 2 for string input"
 
 		# get decision from users 
 		decision = gets.chomp.to_i
 
-		# 
 		if decision == 1
 			puts "Please enter the path of your file"
+			# get file path
 			filename = gets.chomp
+			# get string from file
 			@plaintext = IO.read(filename)
 
 		elsif decision == 2
 			puts "Please input your plaintext"
+			# get string from user input
 			@plaintext = gets
 		end
+
+		# init variable for continue encrypt decision
 		decision2 = 'y'
 		while decision2=='y'
 			puts "Press 1 for Key Cipher Encryption"
@@ -62,17 +65,19 @@ if decision_cipher == 1
 			decisionToEncrypt = gets.chomp.to_i
 			if decisionToEncrypt == 1
 				puts "Please input the key: "
+				# get key from user input
 				key = gets.chomp
+				# init key to KeyCipher class
 				text = KeyCipher.new(key)
 					if continue_encrypt == false
 						@encrypted = text.encrypt(@plaintext)
 						@decrypted = text.decrypt(@encrypted)
-						puts "Encrypted: " + @encrypted
+						puts "\nEncrypted: " + @encrypted
 						puts "Decrypted: " + @decrypted
 					else
 						@encrypted = text.encrypt(@encrypted)
 						@decrypted = text.decrypt(@encrypted)
-						puts "Encrpted: " + @encrypted
+						puts "\nEncrpted: " + @encrypted
 						puts "Decrypted: " + @decrypted
 					end
 
@@ -83,7 +88,7 @@ if decision_cipher == 1
 				# export cipher text 
 				if export == 'y'
 					File.write('Encrypted(keyCipher).txt', @encrypted)
-					puts "Exported to Encrypted(railFenceCipher).txt"
+					puts "Exported to Encrypted(keyCipher).txt"
 				end
 
 			# railFence cipher 
@@ -103,8 +108,13 @@ if decision_cipher == 1
 
 				if export == 'y'
 					File.write('Encrypted(railFenceCipher).txt', @encrypted)
+					puts "\nExported to Encrypted(railFenceCipher).txt"
 				end
 			end
+			puts "-----------------------------------------------"
+			puts "Do you want to continue the encryption (y/n)"
+			decision2 = gets.chomp
+			continue_encrypt = true
 		end
 	else
 		if options[:input_filename] != ""
