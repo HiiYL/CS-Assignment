@@ -5,6 +5,29 @@ require_relative 'railFenceCipher'
 # include non interactive mode library
 require 'micro-optparse'
 
+
+# For interactive:
+#  ruby q3.rb -i
+# For non-interactive help command
+#  ruby q3.rb -h
+# example command
+#  ruby q3.rb -n abc -e krkr
+# above command will read input from file with name abc and will run key, railfence, key , railfence cipher 
+# on the input in that order
+#
+#
+# Command legend:
+#   -i, --[no-]interactive           turn on interactive mode
+#   -e, --encryption-method          defines what encryption and in what order [ k - key cipher ] [ r - railfence ]
+#   -n, --input-filename             input file to process
+#   -o, --output-filename            output file for encrpyted
+#   -r, --rf-key 123                 key for railfence
+#   -k, --ky-key kappa               key for key cipher
+#   -t, --text                       text to encrypt
+#   -h, --help                       Show this message
+#   -v, --version                    Print version
+
+
 # non interactive mode -help 
 options = Parser.new do |p|
   p.version = "fancy script version 1.0"
