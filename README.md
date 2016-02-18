@@ -3,11 +3,11 @@
 Below are the guide for setting up ruby on linux machine and running a ruby program. 
 
 ### Setting up ruby
-1. Install ruby
-sudo apt-get install ruby-full
+1. Install ruby: 
+```sudo apt-get install ruby-full```
 
-2. Run bundler
-bundle install
+2. Run bundler: 
+```bundle install```
 
 ### Running the sytem in interactive mode
 
