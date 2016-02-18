@@ -188,7 +188,7 @@ if options[:interactive]
     end
   end
 else
-  # interactive mode disabled
+  # non-interactive mode
   # -n file_name option
   if options[:input_filename] != ""
     @plaintext = IO.read(options[:input_filename])
