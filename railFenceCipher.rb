@@ -11,10 +11,11 @@ class RailFence
   end
 
   def encrypt(plain)
+    # remove whitespace
     plain = plain.gsub(" ", "") unless plain.nil?
     plain_len = plain.length
 
-    # loop below 
+    # start encryption
     while @cur_line < @key-1 
       # below is the formula to get the number of skip
       @skip=2*(@key-@cur_line-1)
@@ -25,12 +26,13 @@ class RailFence
 
       # start looping row by row 
       while i < plain_len
-        # push the current row first text to cipher array 
+        # push the current row i array of alpabet to cipher array 
         @cipher.push(plain[i])
         # if the cuurrent number of row is even or current row is the first row, skip
         if (@cur_line==0 || j%2 == 0)
           i=i+@skip
         else 
+        # else i is next odd line of row 
           i=i+2*(@key-1)-@skip
         end
         # increase counter to check even or odd row 
@@ -42,6 +44,7 @@ class RailFence
     #loop below is to wrap the most bottom case
     i=@cur_line
     while i < plain_len
+      # push the last row to cipher array 
       @cipher.push(plain[i])
       i+=2*(@key-1)
     end
@@ -99,8 +102,6 @@ class RailFence
     output = @decipher
 
     puts "Decrypted: " + output
-
-    # puts "Decrpyted: " + output
 
     return output
   end
