@@ -28,16 +28,18 @@ class RailFence
       while i < plain_len
         # push the current row i array of alpabet to cipher array 
         @cipher.push(plain[i])
-        # if the cuurrent number of row is even or current row is the first row, skip
+        # if the current number of row is even or current column is even row, skip
         if (@cur_line==0 || j%2 == 0)
+          # i move to next odd row 
           i=i+@skip
         else 
-        # else i is next odd line of row 
+        # else i is next even line of row 
           i=i+2*(@key-1)-@skip
         end
-        # increase counter to check even or odd row 
+        # increase counter to check even or odd column 
         j=j+1
       end
+      # increment current line
       @cur_line=@cur_line+1
     end
 
@@ -67,24 +69,26 @@ class RailFence
     cipher_len = cipher.length
     m=0
 
-    # start looping
+    # start decrytion
     while @cur_line2 < @key-1 
+      # formula to calculate skip required
       @skip=2*(@key-@cur_line2-1)
       n=@cur_line2
       l=0
-      # start 2nd layer looping
+      # start looping row by row 
       while n < cipher_len
-        # skipped array equal to cipher array 0,1,2,3,m+1...
+        # current line array of decipher equal to increment m
         @decipher[n]=cipher[m]
         m=m+1
-        # if first n is equal to n+skip or if even number time of loop n+skip
+        # if the current number of row is even or current column is even row, skip
         if (@cur_line2==0 || l%2 == 0)
+          # [n] move to next odd row of current_line
           n=n+@skip
         else 
-        # else if current line is odd
+          # [n] move to next even row of current_line
           n=n+2*(@key-1)-@skip
         end
-        # increment of loop time
+        # increment column
         l=l+1
       end
       # increment of 1st layer of loop
@@ -94,15 +98,21 @@ class RailFence
     # loop below is to wrap the most bottom case
     i=@cur_line2
     while i < cipher_len
+      # current line array of decipher equal to increment m
       @decipher[i]= cipher[m]
+      # [i] move to next row of current_line
       i+=2*(@key-1)
       m=m+1
     end
+
+    # convert array to string
     @decipher = @decipher.join()
+    # remove new line from string
+    @cipher = @cipher.delete("\n")
     output = @decipher
-
+    #display output
     puts "Decrypted: " + output
-
+    
     return output
   end
 end
