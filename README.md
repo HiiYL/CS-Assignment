@@ -6,7 +6,8 @@ Below are the guide for setting up ruby on linux machine and running a ruby prog
 1. Install ruby: 
 ```sudo apt-get install ruby-full```
 
-2. Change the current directory to CS-Assignment (if you have already, skip this) 
+2. Change the current directory to CS-Assignment. If you have already, skip this.
+
 ```cd CS-Assignment```
 
 3. Run bundler: 
